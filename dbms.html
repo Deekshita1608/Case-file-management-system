@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case file Management System</title>
+    <style>
+        /* Style for labels */
+        label {
+            display: inline-block;
+            width: 150px; /* Set width of labels */
+            text-align: left; /* Align text to the right */
+            margin-bottom: 10px;
+            margin-right: 100px; /* Add some margin to the right for spacing */
+        }
+
+        /* Style for inputs */
+        .sub input {
+            width: 200px; /* Set width of inputs */
+        }
+    </style>
+</head>
+<body style="background-color: pink;">
+    <center>
+    <h1>Case File Management System</h1>
+    </center>
+    <h3> Welcome to the case file management system, designed for the Forensic Science Laboratory! Through this software, officers can view the status of cases on the basis of attributes such as case number, ipc section and the specifications of the case</h3>
+    <h3>It also provides features to receive new cases and handles interdepartmental forwards.</h3>
+    <h1>Select an Option</h1>
+    <form>
+        <input type="radio" id=1 name="opts" value=1>
+        <label for="1" style="width: auto;"> View all cases allotted to a particular Officer</label><br>
+
+        <input type="radio" id=2 name="opts" value=2>
+        <label for="2" style="width: auto;"> View all cases of a Department</label><br>
+
+        <input type="radio" id=3 name="opts" value=3>
+        <label for="3" style="width: auto;"> View status of a case using attributes</label><br>
+
+        <input type="radio" id=6 name="opts" value=6>
+        <label for="6" style="width: auto;"> View all cases under a particular IPC section</label><br>
+
+
+        <input type="radio" id=4 name="opts" value=4>
+        <label for="4" style="width: auto;"> Receive new case</label><br>
+
+        <input type="radio" id=5 name="opts" value=5>
+        <label for="5" style="width: auto;"> Forward case from one department to another</label><br>
+
+        
+        <input type="radio" id=7 name="opts" value=7>
+        <label for="7" style="width: auto;"> View all cases from a particular police station</label><br>
+
+        <input type="radio" id=8 name="opts" value=8>
+        <label for="8" style="width: auto;"> View cases using case number</label><br>
+
+        <input type="radio" id=9 name="opts" value=9>
+        <label for="9" style="width: auto;"> View all completed cases</label><br>
+
+        <input type="radio" id=10 name="opts" value=10>
+        <label for="10" style="width: auto;"> View all pending cases</label><br>
+
+        
+        <button type="button" onclick="mainSubmit()">Submit</button>
+    </form>
+    <br><br>
+    <div id="sub"></div>
+
+    <br><br>
+    <div id="output"></div>
+    <script>
+
+function displayOutput(output) {
+            // Get the output container
+            var outputContainer = document.getElementById("output");
+            outputContainer.innerHTML='';
+
+            // Create a paragraph element to display the output
+            var paragraph = document.createElement("p");
+            // Set the text content of the paragraph to the output
+            paragraph.textContent = output;
+            // Append the paragraph to the output container
+            outputContainer.appendChild(paragraph);
+        }
+        var selmain=0;
+        function appendInputWithLabel(labelText, inputType, inputName, inputValue) {
+            // Create label element
+            var label = document.createElement("label");
+            label.textContent = labelText + ": ";
+
+            // Create input element
+            var input = document.createElement("input");
+            input.setAttribute("type", inputType);
+            input.setAttribute("id", inputName);
+            if (inputValue) {
+                input.setAttribute("value", inputValue);
+            }
+
+            // Append label and input to the container
+            sub.appendChild(label);
+            sub.appendChild(input);
+            sub.appendChild(document.createElement("br")); // Add line break for spacing
+        }
+        function mainSubmit() {
+            // Get all radio buttons with the name "gender"
+            var outputContainer = document.getElementById("output");
+            output.innerHTML='';
+            var mainopts = document.getElementsByName("opts");
+            // Loop through all radio buttons to find the selected one
+            for (var i = 0; i < mainopts.length; i++) {
+                if (mainopts[i].checked) {
+                    selmain=mainopts[i].value;
+                    break;
+                }
+            }
+            console.log(selmain);
+            var sub=document.getElementById("sub");
+            sub.innerHTML="";
+            if (selmain==1){
+                var textBox = document.createElement("input");
+                textBox.setAttribute("type", "text");
+                textBox.setAttribute("id", "name_1");
+                var label = document.createElement("label");
+                label.setAttribute("for", "name_1");
+                label.textContent = "Enter Name of SO: ";
+                var submit=document.createElement('button');
+                submit.onclick=opt1;
+                submit.textContent="Submit";
+                sub.appendChild(label);
+                sub.appendChild(textBox);
+                sub.appendChild(submit);
+            }
+            else if(selmain==9)
+            {
+                opt9();
+            }
+            else if(selmain==10){
+                opt10();
+            }
+            else if (selmain==2){
+                var text=document.createElement('p')
+                text.textContent="Select a Department: ";
+                var radioButton1 = document.createElement("input");
+                radioButton1.setAttribute("type", "radio");
+                radioButton1.setAttribute("name", "dept_2");
+                radioButton1.setAttribute("value",'biology')
+
+                var label1 = document.createElement("label");
+                label1.textContent = "Biology";
+                
+                var radioButton2 = document.createElement("input");
+                radioButton2.setAttribute("type", "radio");
+                radioButton2.setAttribute("name", "dept_2");
+                radioButton2.setAttribute("value",'chemistry')
+
+                var label2 = document.createElement("label");
+                label2.textContent = "Chemistry";
+                
+                var radioButton3 = document.createElement("input");
+                radioButton3.setAttribute("type", "radio");
+                radioButton3.setAttribute("name", "dept_2");
+                radioButton3.setAttribute("value",'physics')
+
+                var label3 = document.createElement("label");
+                label3.textContent = "Physics";
+                var submit=document.createElement('button');
+                submit.onclick=opt2;
+                submit.textContent="Submit";
+                
+                sub.appendChild(text);
+                sub.appendChild(radioButton1);
+                sub.appendChild(label1);
+                sub.appendChild(document.createElement("br"))
+                sub.appendChild(radioButton2);
+                sub.appendChild(label2);
+                sub.appendChild(document.createElement("br"))
+                sub.appendChild(radioButton3);
+                sub.appendChild(label3);
+                sub.appendChild(document.createElement("br"))
+                sub.appendChild(submit);
+
+            }
+            else if (selmain==3){
+                var textBox = document.createElement("input");
+                textBox.setAttribute("type", "text");
+                textBox.setAttribute("id", "att_2");
+                var label = document.createElement("label");
+                label.setAttribute("for", "name_1");
+                label.textContent = "Enter attributes of the case: ";
+                var submit=document.createElement('button');
+                submit.onclick=opt3;
+                submit.textContent="Submit";
+                sub.appendChild(label);
+                sub.appendChild(textBox);
+                sub.appendChild(submit);    
+            }
+            else if (selmain==8)
+            {
+                var textBox = document.createElement("input");
+                textBox.setAttribute("type", "text");
+                textBox.setAttribute("id", "att_3");
+                var label = document.createElement("label");
+                label.setAttribute("for", "name_1");
+                label.textContent = "Enter case id: ";
+                var submit=document.createElement('button');
+                submit.onclick=opt8;
+                submit.textContent="Submit";
+                sub.appendChild(label);
+                sub.appendChild(textBox);
+                sub.appendChild(submit);
+            }
+            else if (selmain==4){
+                appendInputWithLabel("Police Station", "text", "policeStation");
+                appendInputWithLabel("Crime Number", "text", "crimeNo");
+                appendInputWithLabel("Crime Date", "date", "crimeDate");
+                appendInputWithLabel("Received Date", "date", "receivedDate");
+                appendInputWithLabel("Specification", "text", "spec");
+                var deptLabel = document.createElement("label");
+                deptLabel.textContent = "Department: ";
+
+                var radioButton1 = document.createElement("input");
+                radioButton1.setAttribute("type", "radio");
+                radioButton1.setAttribute("name", "dept_4");
+                radioButton1.setAttribute('value','Biology');
+
+                var label1 = document.createElement("label");
+                label1.textContent = "Biology";
+                
+                var radioButton2 = document.createElement("input");
+                radioButton2.setAttribute("type", "radio");
+                radioButton2.setAttribute("name", "dept_4");
+                radioButton2.setAttribute('value','Chemistry');
+
+                var label2 = document.createElement("label");
+                label2.textContent = "Chemistry";
+                
+                var radioButton3 = document.createElement("input");
+                radioButton3.setAttribute("type", "radio");
+                radioButton3.setAttribute("name", "dept_4");
+                radioButton3.setAttribute('value','Physics');
+
+                var label3 = document.createElement("label");
+                label3.textContent = "Physics";
+                var submit=document.createElement('button');
+                submit.onclick=opt4;
+                submit.textContent="Submit";
+
+                sub.appendChild(deptLabel);
+
+                sub.appendChild(radioButton1);
+                sub.appendChild(label1);
+                sub.appendChild(document.createElement('br'));
+                sub.appendChild(document.createElement('label'));
+                sub.appendChild(radioButton2);
+                sub.appendChild(label2);
+                sub.appendChild(document.createElement('br'));
+                sub.appendChild(document.createElement('label'));
+                sub.appendChild(radioButton3);
+                sub.appendChild(label3);
+
+                sub.appendChild(document.createElement('br'));
+
+                appendInputWithLabel("IPC", "text", "ipc");
+                sub.appendChild(submit);
+            }
+            else if(selmain==5){
+                var textBox = document.createElement("input");
+                textBox.setAttribute("type", "text");
+                textBox.setAttribute("id", "cno_5");
+                var label = document.createElement("label");
+                label.setAttribute("for", "cno_5");
+                label.textContent = "Enter case no.: ";
+
+                var dept1Label = document.createElement("label");
+                dept1Label.textContent = "Current Department: ";
+
+                var radioButton1 = document.createElement("input");
+                radioButton1.setAttribute("type", "radio");
+                radioButton1.setAttribute("name", "dept1_5");
+                radioButton1.setAttribute('value','Biology');
+
+                var label1 = document.createElement("label");
+                label1.textContent = "Biology";
+                
+                var radioButton2 = document.createElement("input");
+                radioButton2.setAttribute("type", "radio");
+                radioButton2.setAttribute("name", "dept1_5");
+                radioButton2.setAttribute('value','Chemistry');
+
+                var label2 = document.createElement("label");
+                label2.textContent = "Chemistry";
+                
+                var radioButton3 = document.createElement("input");
+                radioButton3.setAttribute("type", "radio");
+                radioButton3.setAttribute("name", "dept1_5");
+                radioButton3.setAttribute('value','Physics');
+
+                var label3 = document.createElement("label");
+                label3.textContent = "Physics";
+                
+                
+                var dept2Label = document.createElement("label");
+                dept2Label.textContent = "New Department: ";
+
+                var radioButton4 = document.createElement("input");
+                radioButton4.setAttribute("type", "radio");
+                radioButton4.setAttribute("name", "dept2_5");
+                radioButton4.setAttribute('value','Biology');
+                var label4 = document.createElement("label");
+                label4.textContent = "Biology";
+
+                var radioButton5 = document.createElement("input");
+                radioButton5.setAttribute("type", "radio");
+                radioButton5.setAttribute("name", "dept2_5");
+                radioButton5.setAttribute('value','Chemistry');
+                var label5 = document.createElement("label");
+                label5.textContent = "Chemistry";
+
+                var radioButton6 = document.createElement("input");
+                radioButton6.setAttribute("type", "radio");
+                radioButton6.setAttribute("name", "dept2_5");
+                radioButton6.setAttribute('value','Physics');
+                var label6 = document.createElement("label");
+                label6.textContent = "Physics";
+                var submit=document.createElement('button');
+                submit.onclick=opt5;
+                submit.textContent="Submit";
+
+                sub.appendChild(label);
+                sub.appendChild(textBox);
+                sub.appendChild(document.createElement('br'));
+                sub.appendChild(dept1Label);
+
+                sub.appendChild(radioButton1);
+                sub.appendChild(label1);
+                sub.appendChild(document.createElement('br'));
+                sub.appendChild(document.createElement('label'));
+                sub.appendChild(radioButton2);
+                sub.appendChild(label2);
+                sub.appendChild(document.createElement('br'));
+                sub.appendChild(document.createElement('label'));
+                sub.appendChild(radioButton3);
+                sub.appendChild(label3);
+                sub.appendChild(document.createElement('br'));
+                sub.appendChild(dept2Label);
+
+                sub.appendChild(radioButton4);
+                sub.appendChild(label4);
+                sub.appendChild(document.createElement('br'));
+                sub.appendChild(document.createElement('label'));
+                sub.appendChild(radioButton5);
+                sub.appendChild(label5);
+                sub.appendChild(document.createElement('br'));
+                sub.appendChild(document.createElement('label'));
+                sub.appendChild(radioButton6);
+                sub.appendChild(label6);
+                sub.appendChild(document.createElement('br'));
+                sub.appendChild(submit);
+            }
+            else if(selmain==6){
+                var textBox = document.createElement("input");
+                textBox.setAttribute("type", "text");
+                textBox.setAttribute("id", "ipc_6");
+                var label = document.createElement("label");
+                label.setAttribute("for", "ipc_6");
+                label.textContent = "Enter IPC section: ";
+                var submit=document.createElement('button');
+                submit.onclick=opt6;
+                submit.textContent="Submit";
+                sub.appendChild(label);
+                sub.appendChild(textBox);
+                sub.appendChild(submit);
+            }
+            else if(selmain==7){
+                var textBox = document.createElement("input");
+                textBox.setAttribute("type", "text");
+                textBox.setAttribute("id", "ps_7");
+                var label = document.createElement("label");
+                label.setAttribute("for", "ps_7");
+                label.textContent = "Enter Police Station: ";
+                var submit=document.createElement('button');
+                submit.onclick=opt7;
+                submit.textContent="Submit";
+                sub.appendChild(label);
+                sub.appendChild(textBox);
+                sub.appendChild(submit);
+            }
+        }
+    function opt1(){
+        const so=document.getElementById('name_1').value;
+        fetch('http://127.0.0.1:5000/one', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name: so })
+                })
+                .then(response => response.json())
+.then(data => {
+    var outputDiv = document.getElementById('output');
+    outputDiv.innerHTML='';
+    // Create a table element
+    var table = document.createElement('table');
+    table.style.border = '1px solid black'; // Add border to table
+
+    // Create a table header row
+    var headerRow = document.createElement('tr');
+
+    // Get column headers from the first record
+    var headers = ['Master Case No', 'Police Station ID', 'Crime Registration No.','Crime Date','Received Date','Dept','IPC','Specification'];
+    headers.forEach(header => {
+        var headerCell = document.createElement('th');
+        headerCell.textContent = header;
+        headerCell.style.border = '1px solid black'; // Add border to header cell
+        headerRow.appendChild(headerCell);
+    });
+    table.appendChild(headerRow); // Append header row to table
+    cols=Object.keys(data.response[0])
+    // Iterate through the records and add them to the table
+    data.response.forEach(record => {
+        var row = document.createElement('tr');
+
+        cols.forEach(header => {
+            var cell = document.createElement('td');
+            cell.textContent = record[header]; // Access the value of the property
+            cell.style.border = '1px solid black'; // Add border to cell
+            row.appendChild(cell);
+        });
+
+        table.appendChild(row); // Append row to table
+    });
+
+    // Append the table to the output div
+    outputDiv.appendChild(table);
+})
+  
+                .catch(error => console.error('Error:', error));
+        }
+
+        function opt9() {
+    fetch('http://127.0.0.1:5000/nine')
+        .then(response => response.json())
+        .then(data => {
+            var outputDiv = document.getElementById('output');
+
+            // Create a table element
+            var table = document.createElement('table');
+            table.style.border = '1px solid black'; // Add border to table
+
+            // Create a table header row
+            var headerRow = document.createElement('tr');
+            var headers = ['Master Case No', 'Police Station ID', 'Crime Registration No.','Crime Date','Received Date','Dept','IPC','Specification'];
+            // Get column headers from the first record
+            var cols = Object.keys(data.response[0]);
+            headers.forEach(header => {
+                var headerCell = document.createElement('th');
+                headerCell.textContent = header;
+                headerCell.style.border = '1px solid black'; // Add border to header cell
+                headerRow.appendChild(headerCell);
+            });
+            table.appendChild(headerRow); // Append header row to table
+
+            // Iterate through the records and add them to the table
+            data.response.forEach(record => {
+                var row = document.createElement('tr');
+
+                cols.forEach(header => {
+                    var cell = document.createElement('td');
+                    cell.textContent = record[header]; // Access the value of the property
+                    cell.style.border = '1px solid black'; // Add border to cell
+                    row.appendChild(cell);
+                });
+
+                table.appendChild(row); // Append row to table
+            });
+
+            // Append the table to the output div
+            outputDiv.appendChild(table);
+        })
+        .catch(error => console.error('Error:', error));
+}
+function opt10() {
+    fetch('http://127.0.0.1:5000/ten')
+        .then(response => response.json())
+        .then(data => {
+            var outputDiv = document.getElementById('output');
+
+            // Create a table element
+            var table = document.createElement('table');
+            table.style.border = '1px solid black'; // Add border to table
+
+            // Create a table header row
+            var headerRow = document.createElement('tr');
+            var headers = ['Master Case No', 'Police Station ID', 'Crime Registration No.','Crime Date','Received Date','Dept','IPC','Specification'];
+            // Get column headers from the first record
+            var cols = Object.keys(data.response[0]);
+            headers.forEach(header => {
+                var headerCell = document.createElement('th');
+                headerCell.textContent = header;
+                headerCell.style.border = '1px solid black'; // Add border to header cell
+                headerRow.appendChild(headerCell);
+            });
+            table.appendChild(headerRow); // Append header row to table
+
+            // Iterate through the records and add them to the table
+            data.response.forEach(record => {
+                var row = document.createElement('tr');
+
+                cols.forEach(header => {
+                    var cell = document.createElement('td');
+                    cell.textContent = record[header]; // Access the value of the property
+                    cell.style.border = '1px solid black'; // Add border to cell
+                    row.appendChild(cell);
+                });
+
+                table.appendChild(row); // Append row to table
+            });
+
+            // Append the table to the output div
+            outputDiv.appendChild(table);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+
+
+        function opt2(){
+        const deptval = Array.from(document.getElementsByName('dept_2')).find(radio => radio.checked)?.value;
+        console.log(deptval);
+        fetch('http://127.0.0.1:5000/two', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ dept:deptval })
+                })
+                .then(response => response.json())
+.then(data => {
+    var outputDiv = document.getElementById('output');
+    outputDiv.innerHTML='';
+    // Create a table element
+    var table = document.createElement('table');
+    table.style.border = '1px solid black'; // Add border to table
+
+    // Create a table header row
+    var headerRow = document.createElement('tr');
+    var headers = ['Master Case No', 'Dept Case No', 'Officer Name','From Type','Status'];
+    // Get column headers from the first record
+    var cols = Object.keys(data.response[0]);
+    headers.forEach(header => {
+        var headerCell = document.createElement('th');
+        headerCell.textContent = header;
+        headerCell.style.border = '1px solid black'; // Add border to header cell
+        headerRow.appendChild(headerCell);
+    });
+    table.appendChild(headerRow); // Append header row to table
+
+    // Iterate through the records and add them to the table
+    data.response.forEach(record => {
+        var row = document.createElement('tr');
+
+        cols.forEach(header => {
+            var cell = document.createElement('td');
+            cell.textContent = record[header]; // Access the value of the property
+            cell.style.border = '1px solid black'; // Add border to cell
+            row.appendChild(cell);
+        });
+
+        table.appendChild(row); // Append row to table
+    });
+
+    // Append the table to the output div
+    outputDiv.appendChild(table);
+})
+  
+                .catch(error => console.error('Error:', error));
+        }
+        function opt3(){
+        const cno=document.getElementById('att_2').value;
+        fetch('http://127.0.0.1:5000/three', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ no: cno })
+                })
+                .then(response => response.json())
+.then(data => {
+    var outputDiv = document.getElementById('output');
+    outputDiv.innerHTML='';
+    // Create a table element
+    var table = document.createElement('table');
+    table.style.border = '1px solid black'; // Add border to table
+
+    // Create a table header row
+    var headerRow = document.createElement('tr');
+    var headers = ['Master Case No', 'Police Station ID', 'Crime Registration No.','Crime Date','Received Date','Dept','IPC','Specification'];
+    // Get column headers from the first record
+    var cols = Object.keys(data.response[0]);
+    headers.forEach(header => {
+        var headerCell = document.createElement('th');
+        headerCell.textContent = header;
+        headerCell.style.border = '1px solid black'; // Add border to header cell
+        headerRow.appendChild(headerCell);
+    });
+    table.appendChild(headerRow); // Append header row to table
+
+    // Iterate through the records and add them to the table
+    data.response.forEach(record => {
+        var row = document.createElement('tr');
+
+        cols.forEach(header => {
+            var cell = document.createElement('td');
+            cell.textContent = record[header]; // Access the value of the property
+            cell.style.border = '1px solid black'; // Add border to cell
+            row.appendChild(cell);
+        });
+
+        table.appendChild(row); // Append row to table
+    });
+
+    // Append the table to the output div
+    outputDiv.appendChild(table);
+})
+  
+                .catch(error => console.error('Error:', error));
+        }
+        function opt8()
+        {
+            const cno=document.getElementById('att_3').value;
+            fetch('http://127.0.0.1:5000/eight', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ case: cno })
+                })
+                .then(response => response.json())
+.then(data => {
+    var outputDiv = document.getElementById('output');
+    outputDiv.innerHTML='';
+    // Create a table element
+    var table = document.createElement('table');
+    table.style.border = '1px solid black'; // Add border to table
+
+    // Create a table header row
+    var headerRow = document.createElement('tr');
+    var headers = ['Master Case No', 'Police Station ID', 'Crime Registration No.','Crime Date','Received Date','Dept','IPC','Specification'];
+    // Get column headers from the first record
+    var cols = Object.keys(data.response[0]);
+    headers.forEach(header => {
+        var headerCell = document.createElement('th');
+        headerCell.textContent = header;
+        headerCell.style.border = '1px solid black'; // Add border to header cell
+        headerRow.appendChild(headerCell);
+    });
+    table.appendChild(headerRow); // Append header row to table
+
+    // Iterate through the records and add them to the table
+    data.response.forEach(record => {
+        var row = document.createElement('tr');
+
+        cols.forEach(header => {
+            var cell = document.createElement('td');
+            cell.textContent = record[header]; // Access the value of the property
+            cell.style.border = '1px solid black'; // Add border to cell
+            row.appendChild(cell);
+        });
+
+        table.appendChild(row); // Append row to table
+    });
+
+    // Append the table to the output div
+    outputDiv.appendChild(table);
+})
+  
+                .catch(error => console.error('Error:', error));
+        }
+        function opt4(){
+        const ps=document.getElementById('policeStation').value;
+        const crno=document.getElementById('crimeNo').value;
+        const cd=document.getElementById('crimeDate').value;
+        const rd=document.getElementById('receivedDate').value;
+        const ipc=document.getElementById('ipc').value;
+        const spec=document.getElementById('spec').value;
+        const deptval = Array.from(document.getElementsByName('dept_4')).find(radio => radio.checked)?.value;
+        fetch('http://127.0.0.1:5000/four', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({police:ps, crime: crno, crimedt:cd, recdt: rd, ipcsec: ipc, dept: deptval, specs: spec })
+                })
+                .then(response => response.json())
+.then(data => {
+    alert(data['response']);
+})
+  
+                .catch(error => console.error('Error:', error));
+        }
+        function opt5(){
+        const cno=document.getElementById('cno_5').value
+        const odept = Array.from(document.getElementsByName('dept1_5')).find(radio => radio.checked)?.value;
+        const ndept = Array.from(document.getElementsByName('dept2_5')).find(radio => radio.checked)?.value;
+        fetch('http://127.0.0.1:5000/five', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({c:cno, o:odept, n:ndept })
+                })
+                .then(response => response.json())
+.then(data => {
+    alert(data['response'])
+})
+  
+                .catch(error => console.error('Error:', error));
+        }
+        function opt6(){
+        const sec=document.getElementById('ipc_6').value;
+        fetch('http://127.0.0.1:5000/six', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ ipc: sec })
+                })
+                .then(response => response.json())
+.then(data => {
+    var outputDiv = document.getElementById('output');
+    outputDiv.innerHTML='';
+    // Create a table element
+    var table = document.createElement('table');
+    table.style.border = '1px solid black'; // Add border to table
+
+    // Create a table header row
+    var headerRow = document.createElement('tr');
+    var headers = ['Master Case No', 'Police Station ID', 'Crime Registration No.','Crime Date','Received Date','Dept','IPC','Specification'];
+    // Get column headers from the first record
+    var cols = Object.keys(data.response[0]);
+    headers.forEach(header => {
+        var headerCell = document.createElement('th');
+        headerCell.textContent = header;
+        headerCell.style.border = '1px solid black'; // Add border to header cell
+        headerRow.appendChild(headerCell);
+    });
+    table.appendChild(headerRow); // Append header row to table
+
+    // Iterate through the records and add them to the table
+    data.response.forEach(record => {
+        var row = document.createElement('tr');
+
+        cols.forEach(header => {
+            var cell = document.createElement('td');
+            cell.textContent = record[header]; // Access the value of the property
+            cell.style.border = '1px solid black'; // Add border to cell
+            row.appendChild(cell);
+        });
+
+        table.appendChild(row); // Append row to table
+    });
+
+    // Append the table to the output div
+    outputDiv.appendChild(table);
+})
+  
+                .catch(error => console.error('Error:', error));
+        }
+        function opt7(){
+        const ps=document.getElementById('ps_7').value;
+        fetch('http://127.0.0.1:5000/seven', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ psname: ps })
+                })
+                .then(response => response.json())
+.then(data => {
+    var outputDiv = document.getElementById('output');
+
+    // Create a table element
+    var table = document.createElement('table');
+    table.style.border = '1px solid black'; // Add border to table
+
+    // Create a table header row
+    var headerRow = document.createElement('tr');
+    var headers = ['Master Case No', 'Police Station ID', 'Crime Registration No.','Crime Date','Received Date','Dept','IPC','Specification'];
+    // Get column headers from the first record
+    var cols = Object.keys(data.response[0]);
+    headers.forEach(header => {
+        var headerCell = document.createElement('th');
+        headerCell.textContent = header;
+        headerCell.style.border = '1px solid black'; // Add border to header cell
+        headerRow.appendChild(headerCell);
+    });
+    table.appendChild(headerRow); // Append header row to table
+
+    // Iterate through the records and add them to the table
+    data.response.forEach(record => {
+        var row = document.createElement('tr');
+
+        cols.forEach(header => {
+            var cell = document.createElement('td');
+            cell.textContent = record[header]; // Access the value of the property
+            cell.style.border = '1px solid black'; // Add border to cell
+            row.appendChild(cell);
+        });
+
+        table.appendChild(row); // Append row to table
+    });
+
+    // Append the table to the output div
+    outputDiv.appendChild(table);
+})
+  
+                .catch(error => console.error('Error:', error));
+        }
+        function finalsubmit(){
+
+        }
+    </script>
+    
+</body>
+</html>
